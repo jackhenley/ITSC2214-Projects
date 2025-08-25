@@ -1,6 +1,6 @@
 import itsc2214.*;
 import java.io.FileNotFoundException;
-
+//test to makesure github is working
 /**
  * Implements Conway's Game of Life using a 2D array.
  * Provides options for random or file-based grid initialization and
