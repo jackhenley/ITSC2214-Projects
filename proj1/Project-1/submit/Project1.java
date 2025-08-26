@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Random;
 
-//TODO: stub out
+
 /**
  * Implements Conway's Game of Life using a 2D array.
  */
@@ -86,5 +86,49 @@ public class Project1 implements GameOfLife {
     public void nextGeneration() {
 
     }
+
+    /**
+     * isAlive - method used to check if the cell at (r,c) is alive. Acts as helper method
+     * for nextGeneration() and countLiveNeighbors(). 
+     * 
+     * @param r - row index of the cell
+     * @param c - column index of the cell
+     * @return true if cell at (r,c) is alive; false otherwise
+     */
+    public boolean isAlive(int r, int c) {
+
+    }
+
+
+    /**
+     * numRows - method to determine the number of rows in the given simulation
+     * 
+     * @return the number of rows in the grid for this simulation
+     */
+    public int numRows() {
+
+    }
+
+
+     /**
+     * numCols - method to determine the number of cols in the given simulation
+     * 
+     * @return the number of cols in the grid for this simulation
+     */
+    public int numCols() {
+
+    }
+
+    /**
+     * Method used to determine whether or not the current generation is a 
+     * still life (Stable pattern between multiple generations)
+     * ^Marks the end of a simulation
+     * 
+     * @return true if current simulation is a still life; false otherwise 
+     */
+    public boolean isStillLife() {
+
+    }
+
 
 }
