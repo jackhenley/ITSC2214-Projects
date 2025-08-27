@@ -10,12 +10,29 @@ import java.util.Random;
  */
 public class Project1 implements GameOfLife {
 
+    //what fields do we need??
+
+    int totalRows;
+    int totalCols;
+
+
     // TODO Implement 2 constructors
     public Project1() {
+        this.totalRows = 0;
+        this.totalRows = 0;
+        Project1 simulation = new Project1();
+        //todo: throw this exception properly
         throw new UnsupportedOperationException("Unimplemented default constructor");        
     }
     public Project1(int row, int col) {
-        throw new UnsupportedOperationException("Unimplemented constructor with args");        
+        if(row == 0 || col == 0) {
+            throw new UnsupportedOperationException("Unimplemented constructor with args"); 
+        }
+        this.totalCols = col;
+        this.totalRows = row;
+        Project1 simulation = new Project1();
+
+               
     }
 
     // TODO Implement all the methods fron the GameOfLife
@@ -30,10 +47,10 @@ public class Project1 implements GameOfLife {
      * @param aliveProbability - double between (0.0-1.0) representing 
      * probability of cell being initially alive.
      */
-
-     public void randomInitialize(double aliveProbability) {
-
-     }
+    public void randomInitialize(double aliveProbability) {
+        //TODO: instance variables containing current/previous generations
+        //^may also need similar vars in loadFromFile()
+    }
 
 
      /**
