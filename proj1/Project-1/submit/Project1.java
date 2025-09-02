@@ -3,6 +3,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Random;
+/**
+ * @author Jack Henley
+ * @version 1.0
+ * 
+ */
 
 
 /**
@@ -11,15 +16,16 @@ import java.util.Random;
 public class Project1 implements GameOfLife {
 
     //what fields do we need??
+    //probably also need Project1 currentGen and project1 previousGen
 
     int totalRows;
     int totalCols;
 
 
     // TODO Implement 2 constructors
+
     public Project1() {
-        this.totalRows = 0;
-        this.totalRows = 0;
+        
         Project1 simulation = new Project1();
         //todo: throw this exception properly
         throw new UnsupportedOperationException("Unimplemented default constructor");        
