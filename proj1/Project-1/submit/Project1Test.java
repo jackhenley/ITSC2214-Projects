@@ -1,7 +1,6 @@
 import itsc2214.*;
 import org.junit.*;
 import static org.junit.Assert.*;
-
 import java.io.FileNotFoundException;
 
 public class Project1Test {

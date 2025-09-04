@@ -9,6 +9,13 @@
             "name": "Project1Main",
             "request": "launch",
             "mainClass": "Project1Main",
+            "projectName": "Project-1_68cd3e13"
+        },
+        {
+            "type": "java",
+            "name": "Project1Main",
+            "request": "launch",
+            "mainClass": "Project1Main",
             "projectName": "Project 1 GameOfLife_fa48671b"
         },
         {
