@@ -19,14 +19,13 @@ public class Project1 implements GameOfLife {
     //what fields do we need??
     //probably also need Project1 currentGen and project1 previousGen
 
-    int rows;
-    int cols;
-    boolean[][] currentGen;
-    boolean[][] prevGen;
+    private int rows;
+    private int cols;
+    private boolean[][] currentGen;
+    private boolean[][] prevGen;
     
 
 
-    // TODO Implement 2 constructors
 
     /**
      * Constructor that constructs a GameOfLife object with an empty board
@@ -96,24 +95,30 @@ public class Project1 implements GameOfLife {
       * @param data - string containing grid data to be processed
       */
     public void loadFromString(String data) {
+
+        //make scanner
         Scanner scanIn = new Scanner(data);
         
-        int row = scanIn.nextInt();
-        int col = scanIn.nextInt();
+        //get rows and cols 
+            int row = scanIn.nextInt();
+            int col = scanIn.nextInt();
         
+        //initialize current grid with given size
+        currentGen = new boolean[row][col];
+        prevGen = new boolean[row][col];
+
         scanIn.nextLine();
         for(int i = 0; i < row; i++) {
             String line = scanIn.nextLine();
             for(int j = 0; j < col; j++) {
-                if(line.charAt(col) == '.') {
-                    currentGen[row][col] = false;
+                if(line.charAt(j) == '.') {
+                    currentGen[i][j] = false;
                 }else {
-                    currentGen[row][col] = true;
+                    currentGen[i][j] = true;
                 }
-
             }
-            scanIn.close();
         }
+        scanIn.close();
     }
 
 
@@ -127,7 +132,20 @@ public class Project1 implements GameOfLife {
      */
     public void loadFromFile(String filename) throws FileNotFoundException {
         
+        File filePath = new File(filename);
+        StringBuilder newGrid = new StringBuilder();
+        Scanner scanIn = new Scanner(filePath);
 
+        while(scanIn.hasNextLine()) {
+            //store file contents in stringBuilder
+            newGrid.append(scanIn.nextLine()).append("\n");
+        }
+
+        scanIn.close();
+        //convert stringBuilder grid to String so we can call loadFromFile() method
+        String stringGrid = newGrid.toString();
+
+        loadFromFile(stringGrid);
     }
 
 
@@ -140,7 +158,33 @@ public class Project1 implements GameOfLife {
      * @return the number of neighbors nearby that are alive.
      */
     public int countLiveNeighbors(int r, int c) {
-        return 0;
+
+        int liveNeighbors = 0;
+
+        for(int i = -1; i <= 1; i++) {
+            for(int j = -1; j <= 1; j++) {
+                if(i == 0 && j == 0) {
+                    //skip cell we're checking
+                    continue;
+                }
+                
+                //find values to check
+                int newRow = r + i;
+                int newCol = c + j;
+
+
+                if(newRow >= 0 && newRow < rows &&
+                newCol >= 0 && newCol < cols) {
+                    if(currentGen[newRow][newCol]) {
+                        liveNeighbors += 1;
+                    }
+                }
+            }
+        }
+        
+        
+        return liveNeighbors;
+        
     }
 
     /**
@@ -152,6 +196,29 @@ public class Project1 implements GameOfLife {
      */
     public void nextGeneration() {
 
+        //iterate over entire current grid
+        for(int i = 0; i < rows; i ++) {
+            for(int j = 0; j < rows; j++) {
+                
+                //store this cell's properties
+                boolean currentCell = isAlive(i, j);
+                int liveCount = countLiveNeighbors(i, j);
+
+                //store this cell in previous grid
+                prevGen[i][j] = currentCell;
+                
+                //determine this cell's next status 
+                if(currentCell && liveCount == 2) {
+                    currentCell = true;
+                }else if(currentCell && liveCount == 3) {
+                    currentCell = true;
+                }else if(!currentCell && liveCount == 3) {
+                    currentCell = true;
+                }else {
+                    currentCell = false;
+                }
+            }
+        }
     }
 
     /**
@@ -163,8 +230,14 @@ public class Project1 implements GameOfLife {
      * @return true if cell at (r,c) is alive; false otherwise
      */
     public boolean isAlive(int r, int c) {
-        return true;
 
+        boolean result;
+        if(currentGen[r][c]) {
+             result = true;
+        }else {
+            result = false;
+        }
+        return result;
     }
 
 
@@ -174,7 +247,7 @@ public class Project1 implements GameOfLife {
      * @return the number of rows in the grid for this simulation
      */
     public int numRows() {
-        return 0;
+        return this.rows;
 
     }
 
@@ -185,7 +258,7 @@ public class Project1 implements GameOfLife {
      * @return the number of cols in the grid for this simulation
      */
     public int numCols() {
-        return 0;
+        return this.cols;
 
     }
 
@@ -197,8 +270,24 @@ public class Project1 implements GameOfLife {
      * @return true if current simulation is a still life; false otherwise 
      */
     public boolean isStillLife() {
-        return true;
 
+        boolean result = false;
+        int sameCount = 0;
+
+        //deterimne number of cells in grid
+        int totalCells = rows*cols;
+
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
+                if(currentGen[i][j] == prevGen[i][j]) {
+                    sameCount += 1;
+                }
+            }
+        }
+        if(sameCount == totalCells) {
+            result = true;
+        }
+        return result;
     }
 
 
