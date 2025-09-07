@@ -46,5 +46,6 @@ public class Project1Test {
         // check position 0,0
         assertFalse("Position 0,0 should NOT be alive", 
             runner.isAlive(0,0));
+        assertFalse(runner.isStillLife());
     }
 }

@@ -48,6 +48,8 @@ public class Project1 implements GameOfLife {
         }
         this.cols = col;
         this.rows = row;
+        currentGen = new boolean[rows][cols];
+        prevGen = new boolean[rows][cols];
         
 
                
@@ -145,7 +147,7 @@ public class Project1 implements GameOfLife {
         //convert stringBuilder grid to String so we can call loadFromFile() method
         String stringGrid = newGrid.toString();
 
-        loadFromFile(stringGrid);
+        loadFromString(stringGrid);
     }
 
 
@@ -196,29 +198,34 @@ public class Project1 implements GameOfLife {
      */
     public void nextGeneration() {
 
+        //temporary grid to store next generation of values
+        boolean[][] nextGen = new boolean[rows][cols];
+
         //iterate over entire current grid
         for(int i = 0; i < rows; i ++) {
-            for(int j = 0; j < rows; j++) {
+            for(int j = 0; j < cols; j++) {
                 
                 //store this cell's properties
                 boolean currentCell = isAlive(i, j);
                 int liveCount = countLiveNeighbors(i, j);
-
-                //store this cell in previous grid
-                prevGen[i][j] = currentCell;
+               
                 
                 //determine this cell's next status 
                 if(currentCell && liveCount == 2) {
-                    currentCell = true;
+                    nextGen[i][j] = true;
                 }else if(currentCell && liveCount == 3) {
-                    currentCell = true;
+                    nextGen[i][j] = true;
                 }else if(!currentCell && liveCount == 3) {
-                    currentCell = true;
+                    nextGen[i][j] = true;
                 }else {
-                    currentCell = false;
+                    nextGen[i][j] = false;
                 }
+
+                //store this cell in previous grid
+                prevGen[i][j] = currentCell;
             }
         }
+        currentGen = nextGen;
     }
 
     /**
