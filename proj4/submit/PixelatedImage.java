@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 /**
  * Pixelated Image class - TODO: finish documentation
+ * @author Jack Henley
  */
 
 // TODO add documentation
